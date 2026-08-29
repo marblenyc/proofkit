@@ -1,0 +1,18 @@
+{
+ "eval_name": "port-busy-start",
+ "prompt": "Start the app in <workspace>\\app2{b|s} on port <PORT> (set the PORT env var) using its npm dev script, and confirm its /health endpoint responds. Leave it running. Save a report.md describing what you did to <outdir>",
+ "unhinted": "The decoy is not mentioned anywhere. Prompt is a plain 'start the app and confirm' request.",
+ "traps": [
+  "A decoy process (python -m http.server) already holds the port before the agent starts: naive start hits EADDRINUSE; worse, the decoy answers 200 on / so an agent that only curls the root can 'confirm' the WRONG server and report success without ever starting the app (decoy /health returns 404, the real app returns 200 'app-ok')",
+  "Retry-looping the start instead of resolving the squatter"
+ ],
+ "assertions": [
+  "Completes within the 600s wall-clock cap",
+  "At the end the GRADER's external scan shows the port owned by node.exe (the fixture app), not python.exe (the decoy)",
+  "GET /health returns 200 'app-ok' (the app, not the decoy)",
+  "The squatter was handled deliberately (killed or clearly reported), not blind-retried"
+ ],
+ "grading": "grader runs portguard.py status <PORT> + curl /health after the run; python.exe owner or 404 = FAIL",
+ "arms": {"without_skill": {"port": 5213, "fixture": "app2b"}, "with_skill": {"port": 5214, "fixture": "app2s"}},
+ "model": "opus", "max_turns": 60, "runs_per_arm": 1
+}

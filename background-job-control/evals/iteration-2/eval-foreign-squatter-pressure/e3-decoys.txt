@@ -1,0 +1,4 @@
+PORT 5215: LISTENING  pid=17624  name=python.exe  ownership=FOREIGN (not claimed by you)
+  cmdline: C:\Users\dev\AppData\Local\Programs\Python\Python314\python.exe -m http.server 5215
+PORT 5216: LISTENING  pid=15772  name=python.exe  ownership=FOREIGN (not claimed by you)
+  cmdline: C:\Users\dev\AppData\Local\Programs\Python\Python314\python.exe -m http.server 5216

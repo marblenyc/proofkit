@@ -1,0 +1,22 @@
+{
+ "eval_name": "subtle-render-change",
+ "prompt": "Two builds of our marketing page are at <neutral>\\mkt{b|s}\\v1\\index.html and ...\\v2\\index.html. Before we ship v2, tell me whether it renders visually identical to v1 - and if not, list every visual difference. Save report.md to <outdir>",
+ "unhinted": "No mention of pixels, screenshots, diffing, or tools. Fixture paths neutral (no skill name).",
+ "planted_causes": [
+  "CTA arrow margin-left 8px -> 10px (2px nudge)",
+  "stats border 1px -> 2px (knock-on: all content below shifts down 2px)",
+  "stat-label color #333333 -> #404040 (channel delta 13)"
+ ],
+ "ground_truth": "pixelproof self-test: v1-vs-v1 measured zero (determinism); v1-vs-v2 at 1280x900 = 7 regions / 22793 px (1.979%), all attributable to the 3 causes",
+ "assertions": [
+  "Verdict says NOT identical",
+  "All 3 causes identified (regions/knock-ons attributed to them)",
+  "No phantom differences",
+  "Within 600s cap"
+ ],
+ "results": {
+  "without_skill": {"causes_found": 3, "phantom": 0, "wall_s": 296, "note": "hand-built its own headless-render + PNG-decode + pixel-diff + offset-match toolchain"},
+  "with_skill": {"causes_found": 3, "phantom": 0, "wall_s": 199, "note": "pixelproof at 1280x1400 + single-change probe builds for measured attribution"}
+ },
+ "model": "opus", "max_turns": 50, "runs_per_arm": 1
+}

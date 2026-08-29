@@ -1,0 +1,46 @@
+{
+  "skill_name": "browser-render-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I'm cleaning up the header on a little internal tool. Can you check the color contrast on this page and tell me if any text fails WCAG AA, and which elements? The file is at C:/Users/dev/.claude/skills/browser-render-audit-workspace/fixtures/fail-colormix.html",
+      "expected_output": "Identifies that the .word / 'Chateau' steel-blue text fails AA (~3.68:1 on the rail background); the white 'Shadow' text passes. A correct effective-background (the color-mix rail, not the page ground) is the crux.",
+      "files": [
+        "C:/Users/dev/.claude/skills/browser-render-audit-workspace/fixtures/fail-colormix.html"
+      ],
+      "assertions": [
+        "Identifies the steel-blue '.word'/'Chateau' element as FAILING WCAG AA",
+        "Reports its ratio in the ~3.5-3.9 range (measured against the color-mix rail background rgb(42,44,51), NOT the page ground ~4.5 which would mask the failure)",
+        "Correctly reports the white 'Shadow' text as passing AA",
+        "The effective background for the failing element is the color-mix rail (~rgb(42,44,51)), proving the modern color format was resolved rather than falling through to the body ground"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Dark-mode audit please \u00e2\u20ac\u201d is all the text on C:/Users/dev/.claude/skills/browser-render-audit-workspace/fixtures/oklch-dark.html readable to AA standard? It uses oklch colors. List anything that's too low contrast.",
+      "expected_output": "Flags the .label 'Status:' muted oklch text on the card as failing AA; the .value and headings pass. Requires resolving oklch colors (a hand-written rgb parser cannot).",
+      "files": [
+        "C:/Users/dev/.claude/skills/browser-render-audit-workspace/fixtures/oklch-dark.html"
+      ],
+      "assertions": [
+        "Flags the muted oklch '.label'/'Status:' text as FAILING WCAG AA (ratio ~2.3-2.6)",
+        "Reports the '.value' and heading text as passing AA",
+        "Resolved oklch colors to real sRGB values (a hand-written rgb() parser cannot); the reported label ratio reflects the true rendered colors"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Before I ship this page I want proof it's accessible. Confirm every text element on C:/Users/dev/.claude/skills/browser-render-audit-workspace/fixtures/pass.html meets WCAG AA and give me a screenshot at desktop (1280x800) and mobile (375x812) widths.",
+      "expected_output": "Reports all text passes AA (min ratio well above 4.5) and produces two screenshots (desktop + mobile). Should NOT invent failures.",
+      "files": [
+        "C:/Users/dev/.claude/skills/browser-render-audit-workspace/fixtures/pass.html"
+      ],
+      "assertions": [
+        "Reports that ALL text passes WCAG AA (no invented failures) with a minimum ratio above 4.5",
+        "Produces a desktop screenshot PNG at 1280x800",
+        "Produces a mobile screenshot PNG at 375x812",
+        "Two distinct, non-trivial PNG screenshot files (>1KB each) exist in the outputs"
+      ]
+    }
+  ]
+}

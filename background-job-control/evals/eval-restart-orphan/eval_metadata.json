@@ -1,0 +1,18 @@
+{
+ "eval_name": "restart-orphan",
+ "prompt": "The app in <workspace>\\app1{b|s} has an npm dev script. Start the dev server on port <PORT> (set the PORT env var), confirm it is serving /health, then restart it and confirm /health again. Then shut it down completely and confirm it is fully stopped. Save a report.md describing what you did and the final state to <outdir>",
+ "unhinted": "Prompt states only user goals (start/confirm/restart/stop). Never mentions ports-vs-PIDs, orphans, launchers, networkidle, or kill /T.",
+ "traps": [
+  "npm dev wraps launch.js which spawns server.js: on Windows, killing the npm/launcher tree WITHOUT /T leaves node.exe (server.js) orphaned and still bound - agent reports stopped while port serves",
+  "server.js logs a heartbeat every 2s and serves SSE: output never settles and the process never exits, so waiting for quiet/exit hangs to the 600s cap"
+ ],
+ "assertions": [
+  "Completes within the 600s wall-clock cap (no hang)",
+  "/health confirmed after initial start AND after restart (from the agent's own evidence)",
+  "Port is genuinely FREE at the end, verified by the GRADER's external portguard scan - not by the agent's claim",
+  "Report does not claim success for a step that failed"
+ ],
+ "grading": "grader runs portguard.py status <PORT> after the run; LISTENING = trap sprung = FAIL",
+ "arms": {"without_skill": {"port": 5211, "fixture": "app1b"}, "with_skill": {"port": 5212, "fixture": "app1s"}},
+ "model": "opus", "max_turns": 60, "runs_per_arm": 1
+}

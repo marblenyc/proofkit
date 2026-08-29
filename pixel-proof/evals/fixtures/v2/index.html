@@ -1,0 +1,58 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Meridian Analytics</title><style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Segoe UI, Arial, sans-serif; background:#f4f5f7; color:#22252a; }
+  .wrap { width:1200px; margin:0 auto; }
+  header { background:#1d2733; color:#fff; padding:18px 0; }
+  header .wrap { display:flex; justify-content:space-between; align-items:center; }
+  .logo { font-size:20px; font-weight:700; letter-spacing:1px; }
+  nav a { color:#c8d2dd; text-decoration:none; margin-left:26px; font-size:14px; }
+  .hero { padding:56px 0 40px; }
+  .hero h1 { font-size:40px; line-height:1.15; width:640px; }
+  .hero p { margin-top:14px; width:560px; color:#4a5058; font-size:17px; }
+  .cta { display:inline-block; margin-top:24px; background:#2f6fed; color:#fff; padding:12px 26px; border-radius:6px; text-decoration:none; font-size:15px; }
+  .cta .arrow { display:inline-block; margin-left:10px; }
+  .cards { display:flex; gap:24px; margin:36px 0; }
+  .card { flex:1; background:#fff; border:1px solid #dde1e7; border-radius:10px; padding:24px; }
+  .card h3 { font-size:18px; margin-bottom:10px; }
+  .card p { font-size:14px; color:#565c66; line-height:1.5; }
+  .card .tag { display:inline-block; margin-top:14px; font-size:12px; background:#eef3fe; color:#2f6fed; padding:3px 10px; border-radius:999px; }
+  .stats { display:flex; gap:48px; background:#fff; border:2px solid #dde1e7; border-radius:10px; padding:26px 32px; margin-bottom:40px; }
+  .stat b { font-size:30px; display:block; }
+  .stat span { font-size:13px; color:#404040; letter-spacing:.4px; text-transform:uppercase; }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid #dde1e7; border-radius:10px; overflow:hidden; margin-bottom:48px; }
+  th, td { text-align:left; padding:13px 18px; font-size:14px; border-bottom:1px solid #e8ebef; }
+  th { background:#f0f2f5; font-size:12px; text-transform:uppercase; letter-spacing:.5px; color:#5a616b; }
+  tr:last-child td { border-bottom:none; }
+  .yes { color:#1d7a3d; } .no { color:#b3392f; }
+  footer { background:#1d2733; color:#9aa7b5; padding:26px 0; font-size:13px; }
+  footer .wrap { display:flex; justify-content:space-between; }
+</style></head><body>
+<header><div class="wrap"><div class="logo">MERIDIAN</div>
+<nav><a href="#">Product</a><a href="#">Pricing</a><a href="#">Docs</a><a href="#">Company</a></nav></div></header>
+<div class="wrap">
+  <div class="hero">
+    <h1>Ship dashboards your team actually reads</h1>
+    <p>Meridian turns raw event streams into governed, versioned analytics surfaces with reproducible queries and audited freshness.</p>
+    <a class="cta" href="#">Start free trial<span class="arrow">&#8594;</span></a>
+  </div>
+  <div class="cards">
+    <div class="card"><h3>Governed metrics</h3><p>Every metric is declared once, owned, and versioned. Consumers subscribe to definitions, not SQL snippets pasted around.</p><span class="tag">CATALOG</span></div>
+    <div class="card"><h3>Reproducible queries</h3><p>Query results carry the exact definition hash and data watermark they were computed from, so numbers can be re-derived later.</p><span class="tag">PROOFS</span></div>
+    <div class="card"><h3>Freshness audits</h3><p>Pipelines publish freshness attestations; stale panels are flagged in the UI before anyone screenshots them into a deck.</p><span class="tag">TRUST</span></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>4,200+</b><span>Teams on Meridian</span></div>
+    <div class="stat"><b>98.99%</b><span>Query uptime</span></div>
+    <div class="stat"><b>12ms</b><span>Median panel load</span></div>
+    <div class="stat"><b>310M</b><span>Events daily</span></div>
+  </div>
+  <table>
+    <tr><th>Capability</th><th>Starter</th><th>Team</th><th>Enterprise</th></tr>
+    <tr><td>Governed metric catalog</td><td class="yes">Included</td><td class="yes">Included</td><td class="yes">Included</td></tr>
+    <tr><td>Reproducible query proofs</td><td class="no">&#8212;</td><td class="yes">Included</td><td class="yes">Included</td></tr>
+    <tr><td>Freshness attestations</td><td class="no">&#8212;</td><td class="yes">Included</td><td class="yes">Included</td></tr>
+    <tr><td>Custom retention &amp; audit export</td><td class="no">&#8212;</td><td class="no">&#8212;</td><td class="yes">Included</td></tr>
+  </table>
+</div>
+<footer><div class="wrap"><span>&#169; 2026 Meridian Analytics, Inc.</span><span>Status &#183; Security &#183; Terms</span></div></footer>
+</body></html>
