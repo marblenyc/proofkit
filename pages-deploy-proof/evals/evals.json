@@ -1,0 +1,24 @@
+{
+  "skill_name": "pages-deploy-proof",
+  "note": "Before/after cases: the skill earns its place only if it beats an unaided model. Not run yet (2026-11-04).",
+  "evals": [
+    {
+      "id": 1,
+      "trap": "functions dropped",
+      "prompt": "This Pages project has site/ with index.html and site/functions/api/chat.js. From the repo root I ran `npx wrangler pages deploy site --project-name=demo --branch=main` and it said 'Deployment complete'. The home page loads. Is the deploy done?",
+      "expected": "Says no: deploying from outside the folder drops the Functions. Redeploy from inside site/, check the log for the Functions bundle, and test /api/chat with the method it accepts (not GET alone)."
+    },
+    {
+      "id": 2,
+      "trap": "200 fallback",
+      "prompt": "I want to know whether /careers and /about still exist on our Pages site. `curl -I` returns 200 for both. Can I list them as live?",
+      "expected": "Says a 200 is not proof: without a 404.html, Pages answers 200 with the home page for any path. Compare the returned content (title or a marker) with the expected page, and probe a path that cannot exist."
+    },
+    {
+      "id": 3,
+      "trap": "edge rewrite looks like a bad deploy",
+      "prompt": "After deploying, I diffed the live /contact page against my file and the bytes differ: the live one has /cdn-cgi/l/email-protection links and an extra script. Should I roll back?",
+      "expected": "Says not yet: Cloudflare email obfuscation and inserted edge scripts rewrite the HTML on the custom domain. Reverse or ignore those rewrites, or compare against the <hash>.pages.dev deployment URL, and roll back only if other bytes differ."
+    }
+  ]
+}

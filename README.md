@@ -17,6 +17,7 @@ from the buyer's side and every claim traced to a recorded benchmark run.
 | [browser-render-audit](browser-render-audit/) | how a page ACTUALLY renders: WCAG contrast for every visible text element (correct modern-CSS color resolution — `color-mix()`, `color(srgb)`, `oklch`), focus visibility, tap targets | Claude Code · Codex · any browser console ([port](browser-render-audit/port/)) |
 | [background-job-control](background-job-control/) | servers verifiably started, stopped, and owned — by the process that OWNS the port, with re-scan proof and an ownership gate that refuses to kill what you didn't start | Claude Code · Codex · any terminal ([port](background-job-control/port/)) |
 | [pixel-proof](pixel-proof/) | whether two renders match: measured zeros or per-region pixel evidence, never an eyeball verdict | Claude Code · Codex · ChatGPT Code Interpreter ([port](pixel-proof/port/)) |
+| [pages-deploy-proof](pages-deploy-proof/) | a Cloudflare Pages deploy actually landed: every served file read back and compared byte for byte after undoing the edge's own rewrites (inserted scripts, email obfuscation, managed robots.txt), plus dropped Functions, the 200 fallback, redirect loops and stray internal files | Claude Code |
 
 Zero dependencies (Python/JS standard library; drives the browser you already have).
 Each tree is self-contained: `SKILL.md` (the discipline), `scripts/` (the instrument),
