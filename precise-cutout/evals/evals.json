@@ -1,0 +1,32 @@
+{
+  "skill_name": "precise-cutout",
+  "note": "Fixture cases have a measured ground truth (make_fixtures.py). Prompt cases are before/after: the skill earns its place only if it beats an unaided model.",
+  "fixtures": [
+    {"file": "clean.png", "on": ["#b81f33", "#fffaf0"], "expect": "PASS"},
+    {"file": "halo.png", "on": ["#b81f33"], "expect": "FAIL", "names": "halo, fringe colour near white"},
+    {"file": "clipped-shadow.png", "on": ["#b81f33"], "expect": "FAIL", "names": "cut off at the bottom edge"},
+    {"file": "specks.png", "on": ["#b81f33"], "expect": "WARN", "names": "3 specks"},
+    {"file": "no-alpha.png", "on": ["#b81f33"], "expect": "FAIL", "names": "no alpha channel"},
+    {"file": "crop-line.png", "on": ["#1c1d1a"], "expect": "FAIL", "names": "crop edge shows on the dark card"}
+  ],
+  "evals": [
+    {
+      "id": 1,
+      "trap": "halo only on the target colour",
+      "prompt": "I removed the background from a product photo shot on white. On a white page it looks perfect. Tomorrow it goes on our dark burgundy (#4a0c18) banner. Anything to check first?",
+      "expected": "Says the soft edge likely still holds white from the old backdrop, which shows as a pale ring on dark burgundy only. Check on the real colour (composite and zoom, or measure the edge ring), and decontaminate the edge by recolouring it from inside the subject."
+    },
+    {
+      "id": 2,
+      "trap": "glow gap reads as an outline",
+      "prompt": "Add a soft gold backlight behind the cut-out figure on the burgundy card. I want it to look like light behind them, not a sticker.",
+      "expected": "Starts the glow at the figure's edge (brightest there) with a short falloff, does not leave a gap of bare card round the figure, computes it in float with dither so the dark fade does not band, and saves without chroma subsampling."
+    },
+    {
+      "id": 3,
+      "trap": "box behind the cut-out",
+      "prompt": "Put this transparent cut-out of our mascot on a link card. The card colour is the house burgundy.",
+      "expected": "Places the RGBA directly on the exact house hex (read from the CSS, not by eye), uses the same colour for the card and its surround, and never puts the figure on its own rectangle or a flattened JPEG."
+    }
+  ]
+}

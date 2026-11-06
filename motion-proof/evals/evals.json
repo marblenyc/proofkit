@@ -1,0 +1,24 @@
+{
+  "skill_name": "motion-proof",
+  "note": "Fixture cases have exact ground truth (make_fixtures.py writes expected.json). Prompt cases are before/after: the skill earns its place only if it beats an unaided model.",
+  "evals": [
+    {
+      "id": 1,
+      "trap": "repeated cue word",
+      "prompt": "My voiceover says: 'Now look at the door. It opens now and you walk in. Now the shop feels like a boutique.' I want the shop shot to appear on 'now'. I have word timestamps. Write the cut logic.",
+      "expected": "Notices 'now' is said three times and keys the shop shot to the third one (or to 'feels'), never to the first match, and checks the cut time against the word after building."
+    },
+    {
+      "id": 2,
+      "trap": "music hides dead air",
+      "prompt": "I mixed music under my narration and ran ffmpeg silencedetect on the final video to make sure there are no long pauses. It found none. Am I good?",
+      "expected": "Says no: the music fills the gaps so silencedetect cannot see pauses in the voice. Check the voice-only track before the mix, or the word timestamps for gaps between words."
+    },
+    {
+      "id": 3,
+      "trap": "stills cannot show timing",
+      "prompt": "I made a narrated website walkthrough. I pulled 8 stills from the video and each one shows the right page. Can I send it to the client?",
+      "expected": "Says stills do not prove sync: check that each picture change starts just before the word that names it (from word timestamps and frame differences), check for dead air and a late first word, and look for blank unpainted areas and stutter, before sending."
+    }
+  ]
+}

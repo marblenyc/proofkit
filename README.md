@@ -18,8 +18,11 @@ from the buyer's side and every claim traced to a recorded benchmark run.
 | [background-job-control](background-job-control/) | servers verifiably started, stopped, and owned — by the process that OWNS the port, with re-scan proof and an ownership gate that refuses to kill what you didn't start | Claude Code · Codex · any terminal ([port](background-job-control/port/)) |
 | [pixel-proof](pixel-proof/) | whether two renders match: measured zeros or per-region pixel evidence, never an eyeball verdict | Claude Code · Codex · ChatGPT Code Interpreter ([port](pixel-proof/port/)) |
 | [pages-deploy-proof](pages-deploy-proof/) | a Cloudflare Pages deploy actually landed: every served file read back and compared byte for byte after undoing the edge's own rewrites (inserted scripts, email obfuscation, managed robots.txt), plus dropped Functions, the 200 fallback, redirect loops and stray internal files | Claude Code |
+| [precise-cutout](precise-cutout/) | a cut-out is clean on the colour it will sit on: no box, no backdrop haze in the fringe, no clipped shadow, checked on every card colour before anyone sees it, plus a matte cut and a glow that starts at the edge | Claude Code (needs numpy, scipy, Pillow; the cut also needs rembg and pymatting) |
+| [motion-proof](motion-proof/) | a narrated video shows each thing when the voice names it: late or ambiguous cues, dead air, a late first word, overrun, black frames, unpainted bands and capture stutter, all timed from the frames' own timestamps | Claude Code (needs ffmpeg, numpy, Pillow) |
 
-Zero dependencies (Python/JS standard library; drives the browser you already have).
+The first four have zero dependencies (Python/JS standard library; drives the browser you already have).
+precise-cutout and motion-proof need the image and video libraries named in their rows.
 Each tree is self-contained: `SKILL.md` (the discipline), `scripts/` (the instrument),
 `references/` (the sharp edges), `evals/` (the un-hinted benchmark proof), `port/`
 (Codex / ChatGPT installs).
@@ -35,7 +38,9 @@ Each tree is self-contained: `SKILL.md` (the discipline), `scripts/` (the instru
 
 Every instrument shipped only after an un-hinted benchmark against a top-tier no-skill
 baseline in a context-clean harness, graded externally — the runs are recorded under each
-`evals/`. The honest pitch: a strong model can often rebuild these instruments on the fly;
+`evals/`. precise-cutout and motion-proof are the exception so far: they ship tested against
+fixtures with known defects, against real jobs whose owner rejected the first cut, and by two reviewers on other
+models. Their no-skill comparison has not been run yet, and their `evals/benchmark.md` says so. The honest pitch: a strong model can often rebuild these instruments on the fly;
 Proofkit removes the rebuild tax (measured 1.49×–2.7×) and pins the determinism details a
 fresh rebuild must rediscover. On smaller models it prevents outright wrong answers.
 
